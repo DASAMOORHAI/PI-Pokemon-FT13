@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import store from './store.js';
+import http from './http-common.js';
 import App from './containers/App.js';
 import reportWebVitals from './reportWebVitals';
 import { asyncPageStartFetchThunk } from './reducers/index.js';
 
 async function startPage() {
   await store.dispatch(asyncPageStartFetchThunk)
+  await http.get('/types')
 }
 
 startPage()

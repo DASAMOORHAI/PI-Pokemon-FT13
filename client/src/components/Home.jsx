@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { activateFilter, nextPage, prevPage, searchByName } from '../actions/index.js';
+import { nextPage, prevPage, activateFilter } from '../actions/index.js';
+import { asyncSearchByName, asyncFilterPokemon } from '../reducers/index.js';
 import { typePokeFilterFrontCycle, typePokeFilterBackCycle } from './HomeLongFuncs.js';
+import store from '../store.js';
 
-const Home = ({currPoke, pageNum, pageLimit, actFilter, nextPage, prevPage, searchByName}) => {
+const Home = ({currPoke, pageNum, pageLimit, nextPage, prevPage, actFilter}) => {
     const [pokeName, setPokeName] = useState('')
     const [typePokeFilter, setTypePokeFilter] = useState('all');
     const [ogPoke, setOgPoke] = useState(true)
@@ -53,14 +55,15 @@ const Home = ({currPoke, pageNum, pageLimit, actFilter, nextPage, prevPage, sear
         e.preventDefault()
         switch(e.target.name) {
             case 'filterSubmit':
-                actFilter({
+                store.dispatch(asyncFilterPokemon({
                     type: typePokeFilter,
                     sense: orderSense,
-                    order: orderBy
-                })
+                    order: orderBy,
+                    og: ogPoke
+                }))
                 break;
             case 'searchNameSubmit':
-                searchByName(pokeName)
+                store.dispatch(asyncSearchByName(pokeName, ogPoke))
                 setPokeName('')
                 break;
             default:
@@ -75,13 +78,13 @@ const Home = ({currPoke, pageNum, pageLimit, actFilter, nextPage, prevPage, sear
             return (
                 <ul>
                     {props.pokemons.map(pokemon =>
-                        <Link to={`/pokemon/${pokemon.id}`}>
+                        <Link to={`/pokemon/info/${pokemon.id}`}>
                             <li>
                                 <img src={pokemon.img} />
                                 <span>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</span>
                                 <ul>
                                     <li>{pokemon.types[0].type.name}</li>
-                                    {pokemon.types.length === 2 ? <li>{pokemon.types[1].type.name}</li> : null}
+                                    {pokemon.types.length === 2 && pokemon.types[1] !== null ? <li>{pokemon.types[1].type.name}</li> : null}
                                 </ul>
                             </li>
                         </Link>
@@ -93,6 +96,7 @@ const Home = ({currPoke, pageNum, pageLimit, actFilter, nextPage, prevPage, sear
 
     return (
         <div>
+            <button onClick={handleChange} name='OGOrCreated'>{ogPoke ? 'Pokemones oficiales' : 'Pokemones creados'}</button>
             <form onSubmit={handleSubmit} name='searchNameSubmit'>
                 <label>
                     <input type='text' value={pokeName} name='searchPokeName' onChange={handleChange}/>
@@ -102,7 +106,6 @@ const Home = ({currPoke, pageNum, pageLimit, actFilter, nextPage, prevPage, sear
             <form onSubmit={handleSubmit} name='filterSubmit'>
                 <label>
                     <button type='button' onClick={handleChange} onAuxClick={handleChange} onContextMenu={(e)=> e.preventDefault()} name='typePokeFilter'>{typePokeFilter}</button>
-                    <button type='button' onClick={handleChange} name='OGOrCreated'>{ogPoke ? 'Pokemones oficiales' : 'Pokemones creados'}</button>
                     <button type='button' onClick={handleChange} name='senseChange'>{orderSense}</button>
                     <button type='button' onClick={handleChange} name='byChange'>{orderBy}</button>
                 </label>
@@ -111,6 +114,9 @@ const Home = ({currPoke, pageNum, pageLimit, actFilter, nextPage, prevPage, sear
             <button onClick={() => prevPage()}>{'<<'}</button>
             <span>{(pageNum + 1) + '/' + (pageLimit + 1)}</span>
             <button onClick={() => nextPage()}>{'>>'}</button>
+            <Link to='/pokemon/crear'>
+                <button>Crear Pokemon</button>
+            </Link>
             <PokeList pokemons={currPoke}/>
         </div>
     )
@@ -118,17 +124,14 @@ const Home = ({currPoke, pageNum, pageLimit, actFilter, nextPage, prevPage, sear
 
 function mapDispatchToProps(dispatch) {
     return {
-        actFilter: function(payload) {
-            dispatch(activateFilter(payload))
-        },
         nextPage: function() {
             dispatch(nextPage())
         },
         prevPage: function() {
             dispatch(prevPage())
         },
-        searchByName: function(payload) {
-            dispatch(searchByName(payload))
+        actFilter: function(payload) {
+            dispatch(activateFilter(payload))
         }
     }
 }

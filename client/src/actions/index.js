@@ -15,17 +15,3 @@ export function prevPage() {
         type: 'PREV_PAGE'
     }
 }
-
-export function searchByName(payload) {
-    return {
-        type: 'SEARCH_NAME',
-        payload
-    }
-}
-
-export function getPokeInfo(payload) {
-    return {
-        type: 'GET_POKE_INFO',
-        payload
-    }
-}

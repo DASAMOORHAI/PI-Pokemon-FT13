@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router';
 import { connect } from 'react-redux';
-import { getPokeInfo } from '../actions/index.js';
+import { asyncGetPokemonInfo } from '../reducers/index.js';
+import store from '../store.js';
 
-const Pokemon = ({infoPoke, getPokeInfo}) => {
+const Pokemon = ({infoPoke}) => {
     let { idPokemon } = useParams()
 
     useEffect(() => {
-        getPokeInfo(idPokemon);
+        store.dispatch(asyncGetPokemonInfo(idPokemon));
     }, [])
     
     if(Object.keys(infoPoke).length === 0) {
@@ -19,7 +20,7 @@ const Pokemon = ({infoPoke, getPokeInfo}) => {
                 <p>{infoPoke.name.charAt(0).toUpperCase() + infoPoke.name.slice(1)}</p> 
                 <ul>
                     <li>{infoPoke.types[0].type.name}</li>
-                    {infoPoke.types.length === 2 ? <li>{infoPoke.types[1].type.name}</li> : null}
+                    {infoPoke.types.length === 2 && infoPoke.types[1] !== null ? <li>{infoPoke.types[1].type.name}</li> : null}
                 </ul>
                 <p>ID: {infoPoke.id}</p>
                 <ul>
@@ -35,16 +36,8 @@ const Pokemon = ({infoPoke, getPokeInfo}) => {
     }
 }
 
-function mapDispatchToProps(dispatch) {
-    return {
-        getPokeInfo: function(payload) {
-            dispatch(getPokeInfo(payload))
-        }
-    }
-}
-
 const mapStateToProps = (state) => ({
     infoPoke: state.infoPoke
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Pokemon);
+export default connect(mapStateToProps)(Pokemon);

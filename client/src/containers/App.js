@@ -5,6 +5,7 @@ import store from '../store.js';
 import LandingPage from '../components/LandingPage.jsx';
 import Home from '../components/Home.jsx';
 import Pokemon from '../components/Pokemon.jsx';
+import CreatePoke from '../components/CreatePoke.jsx';
 
 function App() {
   return (
@@ -13,11 +14,14 @@ function App() {
         <Route exact path='/'>
           <LandingPage />
         </Route>
-        <Route exact path='/home'>
+        <Route exact path='/pokemon'>
           <Home />
         </Route>
-        <Route exact path='/pokemon/:idPokemon'>
+        <Route exact path='/pokemon/info/:idPokemon'>
           <Pokemon />
+        </Route>
+        <Route exact path='/pokemon/crear'>
+          <CreatePoke />
         </Route>
       </div>
     </Provider>
