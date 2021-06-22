@@ -1,0 +1,32 @@
+button:hover, button:focus {
+    outline: none;
+}
+input:hover, input:focus {
+    outline: none;
+}
+
+#containerLP {
+    position: fixed;
+    background-image: url('../images/LandingPage/LandingFondo.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;    
+    top: 0px;    
+    left: 0px;    
+    right: 0px;   
+    bottom: 0px;
+    min-height: 100%;
+    min-width: 100%;
+}
+
+#HomeBtn {
+    position: relative;
+    font-family: 'Pokemon Pixel Font Regular', Arial, sans-serif;
+    height: 70px;
+    width: 90px;
+    top: 45.5%;
+    left: 7px;
+    border: 3px solid #383838;
+}
+  

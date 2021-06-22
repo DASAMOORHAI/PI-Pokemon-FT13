@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
         let api = await fetch('https://pokeapi.co/api/v2/type')
         api = await api.json()
         for(i = 0; i < api.results.length; i++) {
-            Type.create({
+            await Type.create({
                 name: api.results[i].name
             })
         }

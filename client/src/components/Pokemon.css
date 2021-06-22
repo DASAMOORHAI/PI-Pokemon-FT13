@@ -1,0 +1,144 @@
+#containerP {
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/PokedexFondo.jpg');
+    background-position: center center;
+    background-size: cover;
+    top: 0px;    
+    left: 0px;    
+    right: 0px;   
+    bottom: 0px;
+    min-height: 100%;
+    min-width: 100%;
+    font-family: 'Pokemon Pixel Font Regular', Arial, sans-serif;
+    font-size: 30px;
+}
+
+.generalInfoContainer {
+    height: 200px;
+    width: 700px;
+    padding-bottom: 20px;
+    background-image: url('../images/Pokemon/PokemonInfoGeneral.png');
+    background-repeat: no-repeat;
+    background-size: 700px 200px;
+}
+
+.pokeImgP {
+    position: relative;
+    height: 200px;
+    width: 200px;
+    left: 20px;
+}
+
+.pokeNameCenterer {
+    position: relative;
+    width: 413px;
+    bottom: 195px;
+    left: 245px;
+    text-align: center;
+    font-size: 50px;
+}
+
+#pokeId {
+    position: relative;
+    top: -110px;
+    left: 590px;
+    font-size: 35px;
+}
+
+.detailedInfoContainer {
+    height: 200px;
+    width: 700px;
+    padding-top: 20px;
+    background-image: url('../images/Pokemon/PokemonInfoDetails.png');
+    background-repeat: no-repeat;
+    background-size: 700px 200px;
+}
+
+.detailedInfo {
+    position: relative;
+    display: grid;
+    grid-template: 96.5px 96.5px / 335px 335px;
+    top: -47px;
+    left: 15px;
+    padding: 0px;
+}
+.detailedInfo li {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    font-size: 50px;
+}
+
+.ht {
+    position: absolute;
+    top: 223px;
+    left: 588px;
+    font-size: 40px;
+}
+
+.wt {
+    position: absolute;
+    top: 268px;
+    left: 588px;
+    font-size: 40px;
+}
+
+#pokeInfoSign {
+    position: fixed;
+    height: 30px;
+    width: 350px;
+    top: 35px;
+}
+
+#halfBallLeft {
+    position: fixed;
+    height: 440px;
+    top: 103px;
+    left: 107px;
+    transform: rotate(180deg);
+    z-index: -1;
+}
+
+#middleBall {
+    position: fixed;
+    height: 440px;
+    width: 700px;
+    top: 103px;
+    background-color: #000028;
+    z-index: -1;
+}
+
+#halfBallRight {
+    position: fixed;
+    height: 440px;
+    top: 103px;
+    right: 107px;
+    z-index: -1;
+}
+
+#plsWait {
+    color: white;
+    text-shadow: 2px 1px #203020;
+    font-family: 'Pokemon Pixel Font Regular', Arial, sans-serif;
+    font-size: 22px;
+}
+
+#pokeTypesContainerPokeCustom {
+    position: relative;
+    top: -220px;
+    left: 100px;
+}
+
+#okBtnBackHomeCustoms {
+    position: fixed;
+    width: fit-content;
+    left: 44%;
+    bottom: 50px;
+    border: 3px solid #383838;
+    font-size: 25px;
+}

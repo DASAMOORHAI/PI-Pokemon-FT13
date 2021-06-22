@@ -1,6 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import http from '../http-common.js';
-import types from '../images/index.js';
+import imgs from '../images/index.js';
+import noPokeImg from '../images/Home/NoPokemonImage.png';
+import './CreatePoke.css';
+import '../fonts/font.css';
 
 const CreatePoke = () => {
     const [pokeName, setPokeName] = useState('')
@@ -11,7 +15,7 @@ const CreatePoke = () => {
     const [hhtValue, setHhtValue] = useState('')
     const [whtValue, setWhtValue] = useState('')
     const [selTypes, setSelTypes] = useState([]) 
-    const typesArr = Object.values(types)
+    const typesArr = Object.values(imgs.typesById)
 
     function handleChange(e) {
         switch(e.target.name) {
@@ -51,8 +55,11 @@ const CreatePoke = () => {
                     alert('El pokemon necesita mínimo un tipo')
                 } else {
                     http.post(`/pokemons?name=${pokeName}&types=${selTypes}&pv=${pvValue}&att=${attValue}&def=${defValue}&spd=${spdValue}&hht=${hhtValue}&wht=${whtValue}`)
-                        .then(alert('Pokemon creado'))
-                        .then(setSelTypes([]))
+                        .then(() => alert('Pokemon creado'))
+                        .then(() => setSelTypes([]))
+                        .catch((error) => {
+                            alert('No puede haber dos pokemones con el mismo nombre')
+                        })
                 }
                 break;
             default:
@@ -76,9 +83,9 @@ const CreatePoke = () => {
 
     function TypeList(props) {
         return (
-            <ul>
+            <ul id='typeSelector'>
                 {props.types.map(type =>
-                    <li>
+                    <li className='types'>
                         <img onClick={() => typeSelectHandleChange(type.id)} src={selTypes.includes(type.id) ? type.imgP : type.img}/>
                     </li>
                 )}
@@ -87,42 +94,69 @@ const CreatePoke = () => {
     }
 
     return (
-        <div>
-            <form onSubmit={handleSubmit} name='CreatePokeSubmit'>
-                <label>
-                    Nombre:
-                    <input type='text' value={pokeName} name='pokeName' onChange={handleChange}/>
-                </label>
-                <label>
-                    Tipos:
-                    <TypeList types={typesArr}/>
-                </label>
-                <label>
-                    PV:
-                    <input type='text' value={pvValue} name='pvValue' onChange={handleChange}/> 
-                </label>
-                <label>
-                    Fuerza:
-                    <input type='text' value={attValue} name='attValue' onChange={handleChange}/>
-                </label>
-                <label>
-                    Defensa:
-                    <input type='text' value={defValue} name='defValue' onChange={handleChange}/>
-                </label>
-                <label>
-                    Velocidad:
-                    <input type='text' value={spdValue} name='spdValue' onChange={handleChange}/>
-                </label>
-                <label>
-                    Altura:
-                    <input type='text' value={hhtValue} name='hhtValue' onChange={handleChange}/>
-                </label>
-                <label>
-                    Peso:
-                    <input type='text' value={whtValue} name='whtValue' onChange={handleChange}/>
-                </label>
-                <input type='submit' value='Crear Pokemon'/>
+        <div id='containerCP'>
+            <form id='formContainer' onSubmit={handleSubmit} name='CreatePokeSubmit'>
+                <div className='searchContainerCP' id='searchContainerCPNameCustoms'>
+                    <span className='searchIdentifierCP'>Nombre</span>
+                    <input className='searchInputCP' type='text' value={pokeName} name='pokeName' onChange={handleChange}/>
+                </div>
+                <div className='searchContainerCP' id='searchContainerCPTypesCustoms'>
+                    <span className='searchIdentifierCP'>Tipos</span>
+                    <div id='typeSelectorContainer'>
+                        <TypeList types={typesArr}/>
+                    </div>
+                </div>
+                <div id='statsContainerCP'>
+                    <div className='searchContainerCP searchContainerCPStatsCustoms'>
+                        <span className='searchIdentifierCP'>Altura</span>
+                        <input className='searchInputCP searchInputCPStatsCustoms' type='text' value={hhtValue} name='hhtValue' onChange={handleChange}/>
+                    </div>
+                    <div className='searchContainerCP searchContainerCPStatsCustoms'>
+                        <span className='searchIdentifierCP'>Peso</span>
+                        <input className='searchInputCP searchInputCPStatsCustoms' type='text' value={whtValue} name='whtValue' onChange={handleChange}/>
+                    </div>
+                    <div className='searchContainerCP searchContainerCPStatsCustoms'>
+                        <span className='searchIdentifierCP'>PV</span>
+                        <input className='searchInputCP searchInputCPStatsCustoms' type='text' value={pvValue} name='pvValue' onChange={handleChange}/> 
+                    </div>
+                    <div className='searchContainerCP searchContainerCPStatsCustoms'>
+                        <span className='searchIdentifierCP'>Fuerza</span>
+                        <input className='searchInputCP searchInputCPStatsCustoms' type='text' value={attValue} name='attValue' onChange={handleChange}/>
+                    </div>
+                    <div className='searchContainerCP searchContainerCPStatsCustoms'>
+                        <span className='searchIdentifierCP'>Defensa</span>
+                        <input className='searchInputCP searchInputCPStatsCustoms' type='text' value={defValue} name='defValue' onChange={handleChange}/>
+                    </div>
+                    <div className='searchContainerCP searchContainerCPStatsCustoms'>
+                        <span className='searchIdentifierCP'>Velocidad</span>
+                        <input className='searchInputCP searchInputCPStatsCustoms' type='text' value={spdValue} name='spdValue' onChange={handleChange}/>
+                    </div>
+                </div>
+                <input className='okBtn' id='okBtnCPCreateBtnCustoms' type='submit' value='Crear Pokemon'/>
             </form>
+            <div className='generalInfoContainer' id='generalInfoContainerCreatePokeCustoms'>
+                    <img className='pokeImg' id='pokeImgCreatePokeCustoms' src={noPokeImg}/>
+                    <div className='pokeNameCenterer' id='pokeNameCentererCPCustoms'>
+                        <span>{pokeName}</span>
+                    </div>
+                    <span className='ht' id='htCreatePokeCustoms'>Altura: {!hhtValue ? '???' : hhtValue}</span>
+                    <span className='wt' id='wtCreatePokeCustoms'>Peso: {!whtValue ? '???' : whtValue}</span>
+                    <ul className='pokeTypesContainer' id='pokeTypesContainerCreatePokeCustom'>
+                        {selTypes.length >= 1 ? <li><img src={imgs.typesById[selTypes[0]].img}/></li> : null}
+                        {selTypes.length === 2 ? <li><img src={imgs.typesById[selTypes[1]].img}/></li> : null}
+                    </ul>
+                </div>
+                <div className='detailedInfoContainer' id='detailedInfoContainerCreatePokeCustoms'>
+                    <ul className='detailedInfo' id='detailedInfoCreatePokeCustoms'>
+                        <li>PV: {!pvValue ? '???' : pvValue}</li>
+                        <li>Fuerza: {!attValue ? '???' : attValue}</li>
+                        <li>Defensa: {!defValue ? '???' : defValue}</li>
+                        <li>Velocidad: {!spdValue ? '???' : spdValue}</li>
+                    </ul>
+                </div>
+                <Link to='/pokemon'>
+                    <button className='okBtn' id='okBtnBackCPCustoms'>Volver al Home</button>
+                </Link>
         </div>
     )
 }

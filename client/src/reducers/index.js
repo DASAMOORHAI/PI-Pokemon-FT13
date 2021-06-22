@@ -33,6 +33,7 @@ const rootReducer = (state = initialState, action) => {
             }
         case 'ACT_FILTER_CREATED':
             let newAllPoke = []
+            console.log(action.payload)
             action.payload.tempAll.map(pokemon => {
                 newAllPoke.push({
                     id: pokemon.id,
@@ -59,7 +60,7 @@ const rootReducer = (state = initialState, action) => {
 
             return {
                 ...state,
-                allPoke: newAllPoke,
+                allPokeForUse: newAllPoke,
                 currPoke: actPokes2,
                 pageLimit: action.payload.pageLimit,
                 ogOrNah: false

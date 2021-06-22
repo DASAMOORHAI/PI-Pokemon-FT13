@@ -188,38 +188,50 @@ router.get('/created', async (req, res) => {
 })
 
 router.post('/', async (req, res) => {
-    for(let i in req.query) {
-        if(!req.query[i]) {
-            req.query[i] = null
-        } else if(i !== 'name' & i !== 'types') {
-            req.query[i] = Number(req.query[i])
-        }
-    }
-    
-    let tempPokeTypesId = req.query.types.split(',')
-    let arrPokeTypesId = tempPokeTypesId.map(id => Number(id))
-    let dbPokeTypes = await Type.findAll({
+    let createdCheck = await Pokemon.findOne({
         where: {
-            id: {
-                [Op.or]: arrPokeTypesId
+            name: {
+                [Op.iLike]: req.query.name
             }
         }
     })
 
-    await Pokemon.sync()
-    let newPoke = await Pokemon.create({
-        name: req.query.name,
-        hp: req.query.pv,
-        attack: req.query.att,
-        defense: req.query.def,
-        speed: req.query.spd,
-        height: req.query.hht,
-        weight: req.query.wht
-    })
+    if(createdCheck) {
+        res.sendStatus(400)
+    } else {
+        for(let i in req.query) {
+            if(!req.query[i]) {
+                req.query[i] = null
+            } else if(i !== 'name' & i !== 'types') {
+                req.query[i] = Number(req.query[i])
+            }
+        }
+        
+        let tempPokeTypesId = req.query.types.split(',')
+        let arrPokeTypesId = tempPokeTypesId.map(id => Number(id))
+        let dbPokeTypes = await Type.findAll({
+            where: {
+                id: {
+                    [Op.or]: arrPokeTypesId
+                }
+            }
+        })
 
-    newPoke.setTypes(dbPokeTypes)
+        await Pokemon.sync()
+        let newPoke = await Pokemon.create({
+            name: req.query.name,
+            hp: req.query.pv,
+            attack: req.query.att,
+            defense: req.query.def,
+            speed: req.query.spd,
+            height: req.query.hht,
+            weight: req.query.wht
+        })
 
-    res.sendStatus(200)
+        newPoke.setTypes(dbPokeTypes)
+
+        res.sendStatus(200)
+    }
 })
 
 router.get('/:idPokemon', async (req, res) => {

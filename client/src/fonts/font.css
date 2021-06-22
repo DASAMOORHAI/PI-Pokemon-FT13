@@ -1,0 +1,5 @@
+@font-face {
+    font-family: 'Pokemon Pixel Font Regular';
+    src: local('Pokemon Pixel Font Regular'),
+        url('./pokemon_pixel_font.ttf') format('ttf')
+}
