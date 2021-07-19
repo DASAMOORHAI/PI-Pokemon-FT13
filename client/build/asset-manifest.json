@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.39c460c9.chunk.css",
+    "main.js": "/static/js/main.f08481bc.chunk.js",
+    "main.js.map": "/static/js/main.f08481bc.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.cb7eef13.js",
+    "runtime-main.js.map": "/static/js/runtime-main.cb7eef13.js.map",
+    "static/js/2.4aedfdba.chunk.js": "/static/js/2.4aedfdba.chunk.js",
+    "static/js/2.4aedfdba.chunk.js.map": "/static/js/2.4aedfdba.chunk.js.map",
+    "static/js/3.fca8103a.chunk.js": "/static/js/3.fca8103a.chunk.js",
+    "static/js/3.fca8103a.chunk.js.map": "/static/js/3.fca8103a.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.39c460c9.chunk.css.map": "/static/css/main.39c460c9.chunk.css.map",
+    "static/js/2.4aedfdba.chunk.js.LICENSE.txt": "/static/js/2.4aedfdba.chunk.js.LICENSE.txt",
+    "static/media/LandingPage.css": "/static/media/LandingFondo.951e0507.jpg",
+    "static/media/LoadingPokeball.28c8b42f.png": "/static/media/LoadingPokeball.28c8b42f.png",
+    "static/media/CreatePoke.css": "/static/media/PokedexFondo.fdd36665.jpg",
+    "static/media/electricPressed.e0e5d003.jpg": "/static/media/electricPressed.e0e5d003.jpg",
+    "static/media/fairyPressed.b8452f2f.jpg": "/static/media/fairyPressed.b8452f2f.jpg",
+    "static/media/fightingPressed.1bc104bd.jpg": "/static/media/fightingPressed.1bc104bd.jpg",
+    "static/media/flyingPressed.640e7d3d.jpg": "/static/media/flyingPressed.640e7d3d.jpg",
+    "static/media/groundPressed.a0837d09.jpg": "/static/media/groundPressed.a0837d09.jpg",
+    "static/media/font.css": "/static/media/pokemon_pixel_font.605ec0cc.ttf",
+    "static/media/psychicPressed.d63af7de.jpg": "/static/media/psychicPressed.d63af7de.jpg",
+    "static/media/waterPressed.1ee6504f.jpg": "/static/media/waterPressed.1ee6504f.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.cb7eef13.js",
+    "static/js/2.4aedfdba.chunk.js",
+    "static/css/main.39c460c9.chunk.css",
+    "static/js/main.f08481bc.chunk.js"
+  ]
+}
