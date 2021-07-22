@@ -13,7 +13,7 @@
 #### Home Page
 <img width="90%" src="./client/src/images/HomePage.png" alt="Home Screenshot" title="Home Page"/>
 This page counts with the ability to filter pokemons by name or types, and order them by alphabet or attack stat, be it ascending or descending.<br>
-By pressing the first button, you can change between searching oficial pokemons, or pokemons created by the user, and you can use the previously discussed filter on your created pokemons.
+By pressing the first button, you can change between searching oficial pokemons, or pokemons created by the user, and you can use the previously discussed filter on your created pokemons.<br>
 The 'Types' button can be clicked to go fowards through the types, and right-clicked to go backwards.<br>
 The list of pokemons is paginated, with a max of 12 pokemons per page.<br>
 When you click on a pokemon, it will take to a page that includes that pokemon's info, and 'Crear Pokemon' takes you to a page with a form with which you can create your own pokemons <br><br>
